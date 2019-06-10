@@ -65,21 +65,19 @@ static inline void superio_outb(int reg, int val)
 static inline int superio_inw(int reg)
 {
 	int val;
-
 	outb(reg++, REG);
 	val = inb(VAL) << 8;
 	outb(reg, REG);
 	val |= inb(VAL);
 	return val;
 }
-//实现open函数
+
 int my_gpio_dev_open(struct inode *inode, struct file *filp)
 {
 	printk("my gpio dev open!\n");
 	return 0 ;
 }
 
-//实现close函数
 int my_gpio_dev_close(struct inode *inode, struct file *filp)
 {
 	printk("my gpio dev close!\n");
@@ -161,9 +159,9 @@ static int __init my_gpio_dev_init(void)
 	gpio_io_base = superio_inw(GPIO_BA_REG);
 	pr_info("Found Chip IT%04x GPIO lines starting at %04xh\n", chip_type, gpio_io_base);
 
-    outb(0x00,gpio_io_base+7);
+	outb(0x00,gpio_io_base+7);
     
-    superio_exit();
+	superio_exit();
 	return ret ;
 
 fair:
@@ -177,7 +175,7 @@ static void __exit my_gpio_dev_exit(void)
 {
 	//注销misc设备
 	misc_deregister(&my_gpio_dev);
-    printk("my gpio unregister!\n");
+	printk("my gpio unregister!\n");
 }
 
 module_init(my_gpio_dev_init);
