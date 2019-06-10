@@ -57,7 +57,7 @@ int main(void)
 	//使用的第8组GPIO，这里地址是基地址+7
 	//控制GP80~87输出高还是低,相应的BIT 设为0拉低，设为1拉高
 	//bit0对应GP80,bit1对应GP81,以此类推。这里所有IO设置为高电平
-	outb(0x00,io_base+7);
+	outb(0xff, io_base+7);
 	//设置完后退出IO配置空间
 	outb(0x02, REG);
 	outb(0x02, VAL);
