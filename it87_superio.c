@@ -42,8 +42,8 @@ int main(void)
 	outb(0x2c, REG);
 	outb(0x89, VAL);
 
-	//Simple I/O Base Address MSB Register index=62h
-	//获取GPIO基地址,copied from gpio-it87.c
+	//Simple I/O Base Address MSB/LSB Register index=62h/63h
+	//获取GPIO基地址(16位),这里需要将高位62h和低位63组合起来
 	io_base = superio_inw(0x62);
 	printf("gpio base addr:%02x\n", io_base);
 
